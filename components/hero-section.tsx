@@ -19,8 +19,19 @@ export function HeroSection() {
   const [textIndex, setTextIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Hide loading state once component is mounted
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
+    if (isLoading) return // Don't start typing until loading is complete
+    
     const currentText = typingTexts[textIndex]
     const timer = setTimeout(
       () => {
@@ -45,7 +56,7 @@ export function HeroSection() {
     )
 
     return () => clearTimeout(timer)
-  }, [charIndex, isDeleting, textIndex])
+  }, [charIndex, isDeleting, textIndex, isLoading])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -65,6 +76,67 @@ export function HeroSection() {
       y: 0,
       transition: { duration: 0.8, ease: "easeOut" },
     },
+  }
+
+  // Loading spinner component - Orange rotating circles
+  if (isLoading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex space-x-2">
+            <motion.div
+              className="w-4 h-4 rounded-full bg-orange-500"
+              animate={{ 
+                scale: [1, 1.5, 1], 
+                opacity: [1, 0.7, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 1.2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 0 
+              }}
+            />
+            <motion.div
+              className="w-4 h-4 rounded-full bg-orange-500"
+              animate={{ 
+                scale: [1, 1.5, 1], 
+                opacity: [1, 0.7, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 1.2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 0.4 
+              }}
+            />
+            <motion.div
+              className="w-4 h-4 rounded-full bg-orange-500"
+              animate={{ 
+                scale: [1, 1.5, 1], 
+                opacity: [1, 0.7, 1],
+                rotate: [0, 180, 360]
+              }}
+              transition={{ 
+                duration: 1.2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 0.8 
+              }}
+            />
+          </div>
+          <motion.p
+            className="text-orange-500 font-medium"
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            Loading...
+          </motion.p>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -165,10 +237,10 @@ export function HeroSection() {
 
         <motion.p
           variants={itemVariants}
-          className="text-lg text-foreground/70 mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-xl sm:text-2xl font-light text-foreground/80 mb-14 max-w-3xl mx-auto leading-relaxed tracking-wide font-[Inter] italic"
         >
-          Crafting delightful digital experiences with modern web technologies. Passionate about clean code, beautiful
-          design, and creating products that make a difference.
+          Turning ideas into powerful digital experiences. I write clean code, design with purpose, 
+          and build solutions that truly make an impact — shaping the web one project at a time.
         </motion.p>
 
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">

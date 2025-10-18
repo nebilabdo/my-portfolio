@@ -6,15 +6,19 @@ const timeline = [
   {
     type: "experience",
     title: "Frontend Developer",
-    company: "SyntaxSquad Community",
+    company: "Self-Employed",
     period: "2023 - Present",
     duration: "1+ years",
-    location: "Remote",
+    location: "Remote & Local",
     description:
-      "Building modern web applications and contributing to open-source projects. Mentoring junior developers and leading technical discussions.",
+      "Building modern web applications for clients and personal projects. Creating interactive websites, managing end-to-end development, and continuously learning new technologies.",
     icon: Briefcase,
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind"],
-    achievements: ["Led 3 major projects", "Mentored 5+ junior devs", "Improved performance by 40%"],
+    technologies: ["HTML", "CSS", "SASS", "JavaScript", "React", "Next.js", "Tailwind"],
+    achievements: [
+      "Delivered 5+ client projects independently",
+      "Developed and launched personal projects like Nibilla Foodies",
+      "Improved UI/UX performance and responsiveness across projects",
+    ],
   },
   {
     type: "education",
@@ -52,7 +56,7 @@ export function ExperienceSection() {
         {/* Base Gradient Layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-background to-amber-600/10 animate-gradient-bg" />
         <div className="absolute inset-0 bg-gradient-to-tl from-orange-400/5 via-transparent to-amber-500/8 animate-mesh-gradient" />
-        
+
         {/* Animated Radial Gradients */}
         <motion.div
           className="absolute top-1/4 -left-10 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-amber-400/15 rounded-full blur-3xl"
@@ -67,7 +71,7 @@ export function ExperienceSection() {
             ease: "easeInOut",
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-1/4 -right-10 w-80 h-80 bg-gradient-to-bl from-amber-500/18 to-orange-600/12 rounded-full blur-3xl"
           animate={{
@@ -85,43 +89,43 @@ export function ExperienceSection() {
         {/* Main Floating Blobs - Enhanced */}
         <motion.div
           className="absolute top-10 right-10 w-96 h-96 bg-gradient-to-bl from-orange-500/20 to-amber-400/10 rounded-full blur-3xl"
-          animate={{ 
-            y: [0, -60, 0], 
+          animate={{
+            y: [0, -60, 0],
             x: [0, 40, 0],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
           }}
-          transition={{ 
-            duration: 22, 
-            repeat: Number.POSITIVE_INFINITY, 
-            ease: "easeInOut" 
+          transition={{
+            duration: 22,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-amber-600/15 to-orange-500/12 rounded-full blur-3xl"
-          animate={{ 
-            y: [0, 70, 0], 
+          animate={{
+            y: [0, 70, 0],
             x: [0, -40, 0],
-            scale: [1, 1.15, 1]
+            scale: [1, 1.15, 1],
           }}
-          transition={{ 
-            duration: 25, 
-            repeat: Number.POSITIVE_INFINITY, 
-            ease: "easeInOut" 
+          transition={{
+            duration: 25,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
           }}
         />
-        
+
         <motion.div
           className="absolute top-1/2 left-1/3 w-96 h-96 bg-gradient-to-br from-orange-400/15 to-amber-500/8 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.3, 1], 
+          animate={{
+            scale: [1, 1.3, 1],
             rotate: [0, 180, 360],
-            opacity: [0.3, 0.5, 0.3]
+            opacity: [0.3, 0.5, 0.3],
           }}
-          transition={{ 
-            duration: 35, 
-            repeat: Number.POSITIVE_INFINITY, 
-            ease: "linear" 
+          transition={{
+            duration: 35,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
           }}
         />
 
@@ -173,7 +177,7 @@ export function ExperienceSection() {
             ease: "easeInOut",
           }}
         />
-        
+
         <motion.div
           className="absolute bottom-32 right-32 w-3 h-3 rounded-full bg-amber-500/25 blur-sm"
           animate={{
@@ -207,7 +211,8 @@ export function ExperienceSection() {
           className="mb-16 text-center"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Journey & <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Growth</span>
+            Journey &{" "}
+            <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Growth</span>
           </h2>
           <motion.div
             className="w-20 h-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto"
@@ -228,45 +233,41 @@ export function ExperienceSection() {
             {timeline.map((item, index) => {
               const Icon = item.icon
               const isEven = index % 2 === 0
-              
+
               return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.6, 
+                  transition={{
+                    duration: 0.6,
                     ease: "easeOut",
-                    delay: index * 0.15 
+                    delay: index * 0.15,
                   }}
                   viewport={{ once: true, margin: "-50px" }}
                   className={`relative flex ${
-                    isEven ? "justify-start" : "justify-end"
-                  }`}
+                    isEven ? "lg:justify-start" : "lg:justify-end"
+                  } justify-start ${index > 0 ? "mt-6 lg:-mt-28" : ""}`}
                   style={{
-                    // Desktop: Overlapping (start before previous card finishes)
-                    // Mobile: Sequential (start after previous card finishes)
-                    marginTop: index > 0 ? (isEven ? '-120px' : '-100px') : '0px',
                     zIndex: timeline.length - index,
                   }}
                 >
                   {/* Content Card */}
-                  <div className={`w-full lg:w-[45%] ${
-                    isEven ? "lg:pr-8" : "lg:pl-8"
-                  }`}>
+                  <div className={`w-full lg:w-[45%] ${isEven ? "lg:pr-8" : "lg:pl-8"}`}>
                     <motion.div
-                      whileHover={{ 
-                        scale: 1.02, 
+                      whileHover={{
+                        scale: 1.02,
                         y: -3,
-                        transition: { duration: 0.2 }
+                        transition: { duration: 0.2 },
                       }}
                       className="group relative"
                     >
                       {/* Enhanced Card Glow Effect */}
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl blur opacity-20 group-hover:opacity-30 transition duration-300" />
-                      
+
                       {/* Amazing Dark Mode Card Background */}
-                      <div className="relative p-6 rounded-xl 
+                      <div
+                        className="relative p-6 rounded-xl 
                         /* Light Mode */
                         bg-gradient-to-br from-white/95 to-white/90 backdrop-blur-sm border border-white/60 shadow-lg
                         /* Dark Mode - Matching Amazing Gradient Backgrounds */
@@ -283,34 +284,34 @@ export function ExperienceSection() {
                         dark:after:absolute dark:after:inset-0 dark:after:rounded-xl 
                         dark:after:bg-gradient-to-r dark:after:from-orange-500/20 dark:after:to-amber-500/15
                         dark:after:pointer-events-none dark:after:opacity-0 dark:group-hover:after:opacity-100
-                        dark:after:blur-sm dark:after:transition-opacity dark:after:duration-300">
-                        
+                        dark:after:blur-sm dark:after:transition-opacity dark:after:duration-300"
+                      >
                         {/* Compact Header */}
                         <div className="flex flex-wrap items-center gap-2 mb-3 relative z-10">
                           <span className="px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-semibold shadow-lg shadow-orange-500/25 flex items-center gap-1">
-                            {item.type === "experience" ? (
-                              <Briefcase size={12} />
-                            ) : (
-                              <GraduationCap size={12} />
-                            )}
+                            {item.type === "experience" ? <Briefcase size={12} /> : <GraduationCap size={12} />}
                             {item.type === "experience" ? "EXP" : "EDU"}
                           </span>
-                          
+
                           <span className="flex items-center gap-1 text-xs text-foreground/50 bg-white/40 dark:bg-gray-800/60 px-2 py-1 rounded-full border border-white/30 dark:border-gray-700/50 backdrop-blur-sm">
                             <Calendar size={12} />
                             {item.duration}
                           </span>
                         </div>
-                        
+
                         {/* Title & Company */}
                         <div className="mb-4 relative z-10">
                           <h3 className="text-xl font-bold mb-1 bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-300 dark:to-amber-300 bg-clip-text text-transparent">
                             {item.title}
                           </h3>
-                          <p className="text-base font-semibold text-foreground/80 dark:text-gray-200/90">{item.company}</p>
+                          <p className="text-base font-semibold text-foreground/80 dark:text-gray-200/90">
+                            {item.company}
+                          </p>
                           <div className="flex items-center gap-2 mt-1">
                             <MapPin size={12} className="text-foreground/40 dark:text-gray-500" />
-                            <p className="text-sm text-foreground/50 dark:text-gray-400">{item.period} • {item.location}</p>
+                            <p className="text-sm text-foreground/50 dark:text-gray-400">
+                              {item.period} • {item.location}
+                            </p>
                           </div>
                         </div>
 
@@ -323,7 +324,9 @@ export function ExperienceSection() {
                         <div className="mb-4 relative z-10">
                           <div className="flex items-center gap-1 mb-2">
                             <Target size={14} className="text-orange-500 dark:text-orange-400" />
-                            <span className="text-sm font-semibold text-foreground/70 dark:text-gray-300">Tech Stack</span>
+                            <span className="text-sm font-semibold text-foreground/70 dark:text-gray-300">
+                              Tech Stack
+                            </span>
                           </div>
                           <div className="flex flex-wrap gap-1">
                             {item.technologies.slice(0, 4).map((tech, techIndex) => (
@@ -341,7 +344,9 @@ export function ExperienceSection() {
                         <div className="relative z-10">
                           <div className="flex items-center gap-1 mb-2">
                             <Star size={14} className="text-amber-500 dark:text-amber-400" />
-                            <span className="text-sm font-semibold text-foreground/70 dark:text-gray-300">Highlights</span>
+                            <span className="text-sm font-semibold text-foreground/70 dark:text-gray-300">
+                              Highlights
+                            </span>
                           </div>
                           <div className="space-y-1">
                             {item.achievements.slice(0, 2).map((achievement, achievementIndex) => (
@@ -380,7 +385,7 @@ export function ExperienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-12 lg:mt-16"
         >
           <motion.a
             href="#projects"
