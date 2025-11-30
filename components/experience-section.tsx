@@ -31,7 +31,7 @@ const timeline = [
       "Specialized in software development and web technologies. Completed capstone project on AI-powered learning platform.",
     icon: GraduationCap,
     technologies: ["Java", "Python", "SQL", "Algorithms"],
-    achievements: ["GPA: 3.8/4.0", "Dean's List", "Tech Club President"],
+    achievements: ["Completed 10+ projects", "Dean's List", "Tech Club President"],
   },
   {
     type: "experience",

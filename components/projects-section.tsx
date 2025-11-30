@@ -100,7 +100,6 @@ export function ProjectsSection() {
   const filteredProjects =
     activeCategory === "All" ? allProjects : allProjects.filter((p) => p.category === activeCategory)
 
-  // Show only 6 projects initially, or all if showAllProjects is true
   const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 6)
 
   const hasMoreProjects = filteredProjects.length > 6
@@ -108,26 +107,27 @@ export function ProjectsSection() {
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
-        {/* Enhanced gradient background */}
+        {/* Gradient BG */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-background to-orange-600/10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-500/5 via-background to-orange-600/5" />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.06),transparent_60%)]" />
 
-        {/* Floating animated blobs */}
+        {/* Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.05)_1px,transparent_1px)] bg-[size:64px_64px]" />
+
+        {/* Animated Blobs */}
         <motion.div
           className="absolute top-1/4 left-10 w-72 h-72 bg-gradient-to-r from-orange-500/20 to-amber-500/10 rounded-full blur-3xl"
           animate={{ y: [0, -60, 0], x: [0, 30, 0] }}
-          transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-10 w-80 h-80 bg-gradient-to-l from-orange-600/15 to-amber-600/10 rounded-full blur-3xl"
           animate={{ y: [0, 70, 0], x: [0, -25, 0] }}
-          transition={{ duration: 22, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
+      {/* Header */}
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -137,8 +137,13 @@ export function ProjectsSection() {
           className="mb-16 text-center"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Featured <span className="bg-gradient-to-r from-orange-500 to-amber-600 bg-clip-text text-transparent">Projects</span>
+            Featured{" "}
+            <span className="bg-gradient-to-r from-orange-500 to-amber-600 bg-clip-text text-transparent">
+              Projects
+            </span>
           </h2>
+
+          {/* Divider */}
           <motion.div
             className="w-20 h-1 bg-gradient-to-r from-orange-500 to-amber-600 rounded-full mx-auto"
             initial={{ width: 0 }}
@@ -148,67 +153,83 @@ export function ProjectsSection() {
           />
         </motion.div>
 
-      
-        
-
+        {/* Project Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="wait">
             {displayedProjects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 85, 
+                  damping: 14, 
+                  duration: 0.45, 
+                  delay: index * 0.06 
+                }}
                 whileHover={{ y: -6 }}
-                className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/90 to-gray-50/90 dark:from-gray-800/90 dark:to-gray-900/90 border border-orange-200/50 dark:border-orange-800/30 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 backdrop-blur-sm flex flex-col h-full"
+                className="group relative rounded-2xl overflow-hidden bg-gradient-to-br from-white/90 to-gray-50/90 
+                  dark:from-gray-800/90 dark:to-gray-900/90 border border-orange-200/50 dark:border-orange-800/30 
+                  hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 
+                  hover:shadow-2xl hover:shadow-orange-500/10 backdrop-blur-sm flex flex-col h-full"
               >
-                {/* Image Container */}
+                {/* Image */}
                 <div className="relative h-48 overflow-hidden bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 flex-shrink-0">
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
                     className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent dark:from-gray-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                {/* Content - Flex-grow to push buttons to bottom */}
+                {/* Content */}
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-bold mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
                     {project.title}
                   </h3>
+
                   <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed flex-grow">
                     {project.description}
                   </p>
 
-                  {/* Tech Stack */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.tech?.map((tech, techIndex) => (
+                    {project.tech?.map((tech, i) => (
                       <span
-                        key={techIndex}
-                        className="px-2 py-1 rounded-md text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 font-medium"
+                        key={i}
+                        className="px-2 py-1 rounded-md text-xs bg-orange-100 dark:bg-orange-900/30 
+                          text-orange-700 dark:text-orange-300 font-medium"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  {/* Buttons - Always at bottom */}
+                  {/* Buttons */}
                   <div className="flex gap-3 mt-auto pt-4">
                     <motion.a
                       href={project.links.code}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-orange-500/20 text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-all text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-600"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg 
+                        bg-gray-100 dark:bg-gray-800 hover:bg-orange-500/20 
+                        text-gray-700 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 
+                        transition-all text-sm font-medium border border-gray-200 dark:border-gray-700 
+                        hover:border-orange-300 dark:hover:border-orange-600"
                     >
                       <Github size={16} /> Code
                     </motion.a>
+
                     <motion.a
                       href={project.links.demo}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-white shadow-md hover:shadow-lg transition-all text-sm font-medium"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg 
+                        bg-gradient-to-r from-orange-500 to-amber-500 
+                        hover:from-orange-400 hover:to-amber-400 text-white shadow-md hover:shadow-lg 
+                        transition-all text-sm font-medium"
                     >
                       <ExternalLink size={16} /> Live Demo
                     </motion.a>
@@ -219,7 +240,7 @@ export function ProjectsSection() {
           </AnimatePresence>
         </div>
 
-        {/* See All Projects Button */}
+        {/* Toggle Button */}
         {hasMoreProjects && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -232,26 +253,30 @@ export function ProjectsSection() {
               onClick={() => setShowAllProjects(!showAllProjects)}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 hover:from-orange-500/20 hover:to-amber-500/20 text-foreground hover:text-orange-600 dark:hover:text-orange-400 border border-orange-300/50 dark:border-orange-700/50 hover:border-orange-400 dark:hover:border-orange-500 transition-all duration-300 font-medium group backdrop-blur-sm"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full 
+                bg-gradient-to-r from-orange-500/10 to-amber-500/10 
+                hover:from-orange-500/20 hover:to-amber-500/20 
+                text-foreground hover:text-orange-600 dark:hover:text-orange-400 
+                border border-orange-300/50 dark:border-orange-700/50 
+                hover:border-orange-400 dark:hover:border-orange-500 
+                transition-all duration-300 font-medium group backdrop-blur-sm"
             >
               {showAllProjects ? (
                 <>
-                  <ChevronUp size={20} className="group-hover:-translate-y-0.5 transition-transform" />
-                  Show Less Projects
-                  <ChevronUp size={20} className="group-hover:-translate-y-0.5 transition-transform" />
+                  <ChevronUp size={20} /> Show Less Projects <ChevronUp size={20} />
                 </>
               ) : (
                 <>
-                  <ChevronDown size={20} className="group-hover:translate-y-0.5 transition-transform" />
+                  <ChevronDown size={20} /> 
                   See All Projects ({filteredProjects.length})
-                  <ChevronDown size={20} className="group-hover:translate-y-0.5 transition-transform" />
+                  <ChevronDown size={20} />
                 </>
               )}
             </motion.button>
           </motion.div>
         )}
 
-        {/* Project count indicator */}
+        {/* Count */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

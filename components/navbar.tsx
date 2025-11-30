@@ -80,17 +80,21 @@ export function Navbar() {
             onClick={handleLogoClick}
           >
             <div className="flex flex-col">
-              <motion.span 
-                className="font-extrabold tracking-tight bg-gradient-to-r 
-                  from-black via-orange-600 to-amber-500 
-                  dark:from-orange-200 dark:via-orange-400 dark:to-yellow-300 
-                  bg-clip-text text-transparent font-[Poppins] transition-all duration-500"
-                animate={{
-                  fontSize: isSticky ? "1.5rem" : "2rem" // text-2xl vs text-3xl
-                }}
-              >
-                Nebil Abdo
-              </motion.span>
+              <motion.span
+  className="
+    text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r
+    from-black via-orange-600 to-amber-500
+    dark:from-orange-200 dark:via-orange-400 dark:to-yellow-300
+    bg-clip-text text-transparent font-[Poppins]
+    transition-all duration-500
+  "
+  initial={{ scale: 1 }}
+  animate={{ scale: isSticky ? 0.85 : 1 }}
+  transition={{ duration: 0.25 }}
+>
+  Nebil Abdo
+</motion.span>
+
             </div>
           </motion.div>
 
